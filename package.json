@@ -1,0 +1,16 @@
+{
+  "name": "server-status-bot",
+  "version": "1.0.0",
+  "description": "displays the status of a minecraft server (in this case, caro and xavis)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OBro1961",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.0",
+    "minecraft-server-util": "^3.1.0",
+    "node.js": "0.0.1-security"
+  }
+}
