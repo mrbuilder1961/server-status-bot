@@ -18,26 +18,23 @@ bot.on('message', message =>{
  
             if(!args[1]) return message.channel.send('Minecraft Server IP Address required.')
  
-            util.queryFull(args[1], {port:25565}) // Basically, this is the code that fetches the ip of a minecraft server (args[1]). 
-                .then((response) => {             // Then, after it gets the data (response) it logs it in the console. All good.
+            util.queryFull(args[1], {port:25565}) 
+                .then((response) => {
                     console.log(response);
                     // the response is only available from within this util.queryFull block, which is why it was
                     // saying response is undefined--only this block of code knows about response. So I wrote a function
                     // so that we can send the response to it and use it (the new function is at the bottom); the new
-                    // function will just return the MessageEmbed, which you can then send to the channel like you were 
-                    // trying to do before
+                    // function will just return the MessageEmbed, which you can then send to the channel.
                     const Embed = handleResponse(response);
                     message.channel.send(Embed)
                 })
-                .catch((error) => {               // Also, this is all in a Discord Bot, and this is Javascript with node.js,
-                    throw error;                  // discord.js, and npm minecraft-server-util package (node package manager)
+                .catch((error) => {
+                    throw error;
                 });                               
         }
     }
 )
 
-// this function is just taking the response and using it, no changes to your code 
-// just wrapped it in a function so it would have access to response
 function handleResponse(response) {
     new MessageEmbed()
     .setTitle('Server Info')
