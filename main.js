@@ -3,6 +3,7 @@ const { queryFull } = require('minecraft-server-util')
 const bot = new Client()
 const util = require('minecraft-server-util')
 const prefix = '!'
+const token = 'discord_token_that_will_not_be_revealed_here'
  
 bot.on('ready', () =>{
     console.log('Server Status Bot is online.')
@@ -35,16 +36,14 @@ bot.on('message', message =>{
     }
 )
 
-bot.login('NzgxMjk1OTk3MDcwMjEzMTQz.X77kmQ.yMXV6Wy2LI0p4t_Ovl46mOo1Ka4')
-
 // this function is just taking the response and using it, no changes to your code 
 // just wrapped it in a function so it would have access to response
 function handleResponse(response) {
-    new MessageEmbed()      // But here, it tries to make a embed message (basically a fancy message). 
-    .setTitle('Server Info')              // But it says that response.<data> isn't defined.
-    .addField('\u200b', '\u200b')         // If I put the code inside the embed, it doesn't work.
-    .setColor('#55c93f')                  // Do you know how to make the Embed function recognize the response variable exists?
-    .addFields(                           // I believe if that is fixed, I can fix any other problems that occur myself.
+    new MessageEmbed()
+    .setTitle('Server Info')
+    .addField('\u200b', '\u200b')
+    .setColor('#55c93f')
+    .addFields(
         {name: 'IP Address', value: response.host + '(:' + response.port + ')'},
         {name: 'Version', value: response.version},
         {name: 'MOTD', value: response.description},
@@ -52,3 +51,5 @@ function handleResponse(response) {
         {name: 'Plugins', value: response.plugins}
     )
 }
+
+bot.login(token)
