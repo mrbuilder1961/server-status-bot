@@ -3,7 +3,7 @@ const { queryFull } = require('minecraft-server-util')
 const bot = new Client()
 const util = require('minecraft-server-util')
 const prefix = '!'
-const token = 'your-discord-token-here'
+const token = 'your-discord-token-goes-here'
  
 bot.on('ready', () =>{
     console.log('Server Status Bot is online!')
@@ -18,17 +18,15 @@ bot.on('message', message =>{
  
             if(!args[1]) return message.channel.send('Minecraft Server IP Address required.')
  
-            util.queryFull(args[1], {port:25565})
+            util.queryFull(args[1])
                 .then((response) => {
                     console.log(response);
-                    // the response is only available from within this util.queryFull block, which is why it was
-                    // saying response is undefined--only this block of code knows about response. So I wrote a function
-                    // so that we can send the response to it and use it (the new function is at the bottom); the new
-                    // function will just return the MessageEmbed, which you can then send to the channel.
-                    const Embed = handleResponse(response)
+                    const Embed = handleResponse(response, message)
                     message.channel.send(Embed)
                 })
                 .catch((error) => {
+                    console.log(error);
+                    if(error != null, message.channel.send('Failed to get server info. Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: ||' + error + '||')) 
                     throw error;
                 });                               
         }
@@ -36,7 +34,7 @@ bot.on('message', message =>{
 )
 
 
-function handleResponse(response) {
+function handleResponse(response, message) {
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
