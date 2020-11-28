@@ -3,10 +3,10 @@ const { queryFull } = require('minecraft-server-util')
 const bot = new Client()
 const util = require('minecraft-server-util')
 const prefix = '!'
-const token = 'discord_token_that_will_not_be_revealed_here'
+const token = 'your-discord-token-here'
  
 bot.on('ready', () =>{
-    console.log('Server Status Bot is online.')
+    console.log('Server Status Bot is online!')
 })
 
 bot.on('message', message =>{
