@@ -21,7 +21,7 @@ bot.on('message', message =>{
             util.queryFull(args[1])
                 .then((response) => {
                     console.log(response);
-                    const Embed = handleResponse(response, message)
+                    const Embed = handleResponse(response)
                     message.channel.send(Embed)
                 })
                 .catch((error) => {
@@ -34,7 +34,7 @@ bot.on('message', message =>{
 )
 
 
-function handleResponse(response, message) {
+function handleResponse(response) {
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
