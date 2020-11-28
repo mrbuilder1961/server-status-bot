@@ -18,7 +18,7 @@ bot.on('message', message =>{
  
             if(!args[1]) return message.channel.send('Minecraft Server IP Address required.')
  
-            util.queryFull(args[1], {port:25565}) 
+            util.queryFull(args[1], {port:25565})
                 .then((response) => {
                     console.log(response);
                     // the response is only available from within this util.queryFull block, which is why it was
