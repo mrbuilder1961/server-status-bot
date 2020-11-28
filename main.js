@@ -25,7 +25,7 @@ bot.on('message', message =>{
                     // saying response is undefined--only this block of code knows about response. So I wrote a function
                     // so that we can send the response to it and use it (the new function is at the bottom); the new
                     // function will just return the MessageEmbed, which you can then send to the channel.
-                    const Embed = handleResponse(response);
+                    const Embed = handleResponse(response)
                     message.channel.send(Embed)
                 })
                 .catch((error) => {
@@ -35,18 +35,19 @@ bot.on('message', message =>{
     }
 )
 
+
 function handleResponse(response) {
-    new MessageEmbed()
-    .setTitle('Server Info')
-    .addField('\u200b', '\u200b')
-    .setColor('#55c93f')
+    const Embed = new MessageEmbed()
+    .setTitle('"'+ response.host + '" Server Info')
+    .setColor('#2a9c34')
     .addFields(
-        {name: 'IP Address', value: response.host + '(:' + response.port + ')'},
-        {name: 'Version', value: response.version},
-        {name: 'MOTD', value: response.description},
-        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers},
-        {name: 'Plugins', value: response.plugins}
+        {name: 'IP Address', value: response.host + ' ( :' + response.port + ')'},
+        {name: 'Version & Software', value: response.version + ', ' + response.software},
+        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' ( ' + response.players + ' ) '},
+        {name: 'Plugins', value: response.plugins},
+        {name: 'Other Debug Info', value: 'SRV Record: "' + response.srvRecord + '"\nLevel Name: "'+ response.levelName + '"\nGame Type: "'+ response.gameType + '"'}
     )
+    return Embed;
 }
 
 bot.login(token)
