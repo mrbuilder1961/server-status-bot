@@ -1,9 +1,8 @@
 const {Client, MessageEmbed} = require('discord.js')
-const { queryFull } = require('minecraft-server-util')
 const bot = new Client()
 const util = require('minecraft-server-util')
 const prefix = '!'
-const token = 'your-discord-token-goes-here'
+const token = 'your-discord-token-here'
  
 bot.on('ready', () =>{
     console.log('Server Status Bot is online!')
@@ -18,10 +17,11 @@ bot.on('message', message =>{
  
             if(!args[1]) return message.channel.send('Minecraft Server IP Address required.')
  
-            util.queryFull(args[1])
+            util.status(args[1])
                 .then((response) => {
                     console.log(response);
                     const Embed = handleResponse(response)
+
                     message.channel.send(Embed)
                 })
                 .catch((error) => {
@@ -33,17 +33,17 @@ bot.on('message', message =>{
     }
 )
 
-
 function handleResponse(response) {
+    console.log(response.samplePlayers)
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
     .addFields(
         {name: 'IP Address', value: response.host + ' ( :' + response.port + ')'},
-        {name: 'Version & Software', value: response.version + ', ' + response.software},
-        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' ( ' + response.players + ' ) '},
-        {name: 'Plugins', value: response.plugins},
-        {name: 'Other Debug Info', value: 'SRV Record: "' + response.srvRecord + '"\nLevel Name: "'+ response.levelName + '"\nGame Type: "'+ response.gameType + '"'}
+        {name: 'Version', value: response.version},
+        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' ( ' + response.samplePlayers + ' ) '},
+        {name: 'Mod Info', value: response.modInfo},
+        {name: 'Other Debug Info', value: 'Protocol Version: ' + response.protocolVersion}
     )
     return Embed;
 }
