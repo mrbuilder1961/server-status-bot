@@ -41,11 +41,18 @@ function handleResponse(response) {
     .addFields(
         {name: 'IP Address', value: response.host + ' ( :' + response.port + ')'},
         {name: 'Version', value: response.version},
-        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' ( ' + response.samplePlayers + ' ) '},
+        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' ( ' + printPlayers(response.samplePlayers) + ' ) '},
         {name: 'Mod Info', value: response.modInfo},
         {name: 'Other Debug Info', value: 'Protocol Version: ' + response.protocolVersion}
     )
     return Embed;
+}
+
+// map through each player object to get an array of just player names
+// and then turn that array into a string with .join (commas in between)
+// so [p1, p2, 3] becomes 'p1, p2, p3'
+function printPlayers(players) {
+    return players.map((player) => player.name).join(', ');
 }
 
 bot.login(token)
