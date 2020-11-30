@@ -26,7 +26,7 @@ bot.on('message', message =>{
                 })
                 .catch((error) => {
                     console.log(error);
-                    if(error != null, message.channel.send('Failed to get server info. Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: ||' + error + '||')) 
+                    if(error != null, message.channel.send('Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: ||' + error + '||')) 
                     throw error;
                 });                               
         }
