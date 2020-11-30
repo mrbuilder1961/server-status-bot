@@ -1,16 +1,25 @@
 {
   "name": "server-status-bot",
-  "version": "1.0.0",
-  "description": "displays the status of a minecraft server (in this case, caro and xavis)",
+  "version": "1.0.2",
+  "description": "Displays the status of any Minecraft server!",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrbuilder1961/server-status-bot.git"
+  },
   "author": "OBro1961",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrbuilder1961/server-status-bot/issues"
+  },
+  "homepage": "https://github.com/mrbuilder1961/server-status-bot#readme"
+    
   "dependencies": {
-    "discord.js": "^12.5.0",
-    "minecraft-server-util": "^3.1.0",
-    "node.js": "0.0.1-security"
+  "discord.js": "^12.5.0",
+  "minecraft-server-util": "^3.1.0",
+  "node.js": "0.0.1-security"
   }
 }
