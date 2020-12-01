@@ -10,24 +10,25 @@ bot.on('ready', () =>{
 
 bot.on('message', message =>{
  
-    let args = message.content.substring(prefix.length).split(' ')
- 
+    let args = message.content.substring(prefix.length).split(/ +/)
+
+    
     switch(args[0]){
         case 'stat':
  
             if(!args[1]) return message.channel.send('Minecraft Server IP Address required.')
  
-            util.status(args[1])
+            util.status(serverAlias(args))
                 .then((response) => {
                     console.log(response);
                     const Embed = handleResponse(response)
-
                     message.channel.send(Embed)
                 })
                 .catch((error) => {
                     console.log(error);
-                    if(error != null, message.channel.send('Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: ||' + error + '||')) 
-                    throw error;
+                    if( error != null && error == 'undefined') return message.channel.send(`Failed to get server info, the server is off.\nError: \|\|Server down\|\|`)
+                    else if(error != null) return message.channel.send(`Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: \|\|${error}\|\|`)
+                    return;
                 });                               
         }
     }
@@ -35,12 +36,16 @@ bot.on('message', message =>{
 
 function printPlayers(players) {
     if(players == null) return ''
-    else return players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '')
+    else {
+        let playerRename1 = players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '');
+        let playerRename2 = playerRename1.replace(/_/g, '\_');
+        return playerRename2;
+    }
 }
 
 function handleResponse(response) {
     let desc = response.description.descriptionText
-    let betterDesc = desc.replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '')
+    let betterDesc = desc.trim().replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '')
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
@@ -52,6 +57,12 @@ function handleResponse(response) {
         {name: 'Other Debug Info', value: 'Protocol Version: ' + response.protocolVersion}
     )
     return Embed;
+}
+
+function serverAlias(args) {
+    if(args[1] != 'hypixel') return args[1];
+    else(args[1] == 'hypixel')
+        return 'mc.hypixel.net';
 }
 
 bot.login(token)
