@@ -26,10 +26,9 @@ bot.on('message', message =>{
                 })
                 .catch((error) => {
                     console.log(error);
-                    if( error != null && error == 'undefined') return message.channel.send(`Failed to get server info, the server is off.\nError: \|\|Server down\|\|`)
-                    else if(error != null) return message.channel.send(`Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: \|\|${error}\|\|`)
+                    if(error != null) return message.channel.send(`Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: \|\|${error}\|\|`)
                     return;
-                });                               
+                });
         }
     }
 )
