@@ -1,6 +1,6 @@
 {
   "name": "server-status-bot",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Displays the status of any Minecraft server!",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/mrbuilder1961/server-status-bot/issues"
   },
-  "homepage": "https://github.com/mrbuilder1961/server-status-bot#readme"
+  "homepage": "https://github.com/mrbuilder1961/server-status-bot#readme",
     
   "dependencies": {
   "discord.js": "^12.5.0",
