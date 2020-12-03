@@ -11,7 +11,6 @@ bot.on('ready', () =>{
 bot.on('message', message =>{
  
     let args = message.content.substring(prefix.length).split(/ +/)
-
     
     switch(args[0]){
         case 'stat':
