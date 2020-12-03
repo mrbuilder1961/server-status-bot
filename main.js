@@ -26,8 +26,8 @@ bot.on('message', message =>{
                 })
                 .catch((error) => {
                     console.log(error);
-                    if(error != null) return message.channel.send(`Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\nError: \|\|${error}\|\|`)
-                    return;
+                    if(error != null) return message.channel.send(`Failed to get server info, maybe you spelled it wrong? Try again later.\nIf this error persists, either the server is down or there\'s a bug in my code.\n\|\| ${error} \|\|`)
+                    throw error;
                 });
         }
     }
@@ -36,7 +36,7 @@ bot.on('message', message =>{
 function printPlayers(players) {
     if(players == null) return ''
     else {
-        let playerRename1 = players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '');
+        let playerRename1 = players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â|â|\x98|\x83/g, '')
         let playerRename2 = playerRename1.replace(/_/g, '\_');
         return playerRename2;
     }
@@ -44,7 +44,7 @@ function printPlayers(players) {
 
 function handleResponse(response) {
     let desc = response.description.descriptionText
-    let betterDesc = desc.trim().replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '')
+    let betterDesc = desc.trim().replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â|â|\x98|\x83/g, '')
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
