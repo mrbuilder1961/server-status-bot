@@ -36,9 +36,10 @@ bot.on('message', message =>{
 function printPlayers(players) {
     if(players == null) return ''
     else {
-        let playerRename1 = players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â|â|\x98|\x83/g, '')
+        let playerRename1 = players.map((player) => player.name).join(', ').replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â/g, '');
         let playerRename2 = playerRename1.replace(/_/g, '\_');
-        return playerRename2;
+        let playerRename3 = ' (' + playerRename2 + ')';
+        return playerRename3;
     }
 }
 
@@ -52,7 +53,7 @@ function handleResponse(response) {
         {name: 'IP Address', value: response.host + ' ( :' + response.port + ')'},
         {name: 'MOTD', value: betterDesc},
         {name: 'Version', value: response.version},
-        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + ' (' + printPlayers(response.samplePlayers) + ')'},
+        {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + printPlayers(response.samplePlayers)},
         {name: 'Other Debug Info', value: 'Protocol Version: ' + response.protocolVersion}
     )
     return Embed;
