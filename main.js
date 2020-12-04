@@ -45,12 +45,14 @@ function printPlayers(players) {
 function handleResponse(response) {
     let desc = response.description.descriptionText
     let betterDesc = desc.trim().replace(/§a|§b|§c|§d|§e|§f|§g|§k|§l|§m|§n|§o|§r|§1|§2|§3|§4|§5|§6|§7|§8|§9|Â|â|\x98|\x83/g, '')
+    let betterDesc2 = betterDesc1.replace(/\x98/g, ':snowman:')
+    let betterDesc3 = betterDesc2.replace(/\x83/g, ':snowman2:')
     const Embed = new MessageEmbed()
     .setTitle('"'+ response.host + '" Server Info')
     .setColor('#2a9c34')
     .addFields(
         {name: 'IP Address', value: response.host + ' ( :' + response.port + ')'},
-        {name: 'MOTD', value: betterDesc},
+        {name: 'MOTD', value: betterDesc3},
         {name: 'Version', value: response.version},
         {name: 'Players', value: response.onlinePlayers + ' / ' + response.maxPlayers + printPlayers(response.samplePlayers)},
         {name: 'Other Debug Info', value: 'Protocol Version: ' + response.protocolVersion}
