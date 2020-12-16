@@ -57,7 +57,9 @@ function aliases(args) {
     if(args[1] == 'alias1' | args[1] == 'alias1.1' | args[1] == 'alias1.2') return 'alias1 IP address';
     else if(args[1] == 'hypixel' | args[1] == 'Hypixel' | args[1] == 'hypix' | args[1] == 'hypixle') return 'hypixel.net';
         else if(args[1] == 'alias3' | args[1] == 'alias3.1' | args[1] == 'alias3.2' | args[1] == 'alias3.3' ) return 'alias3 IP address';
-// Etc...
+            else if(args[1] != 'alias1' | args[1] != 'alias1.1' | args[1] != 'alias1.2' | args[1] != 'hypixel' | args[1] != 'Hypixel' | args[1] != 'hypix' | args[1] != 'hypixle' | args[1] != 'alias3' | args[1] != 'alias3.1' | args[1] != 'alias3.2' | args[1] != 'alias3.3') return args[1];
+// To add more aliases, just add another "else if (args[1] == 'another alias' | args[1] == 'another extra alias') return 'another ip address;"
+// Then, just add your new alias names (in this case, 'another alias' and 'another extra alias') to the bottom-est line
 }
 
 bot.login('your-discord-bot-token-here')
